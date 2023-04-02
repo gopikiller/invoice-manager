@@ -1,3 +1,8 @@
-import express from 'express';
+import { Server } from './components/Server';
+import validateEnv from './utils/validEnv';
 
-const app = express();
+validateEnv();
+
+const app = new Server();
+
+app.listen();
