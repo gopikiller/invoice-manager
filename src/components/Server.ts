@@ -8,7 +8,7 @@ import helmet from 'helmet';
 import errorMiddleware from '../middleware/error.middleware';
 import { Routes } from '../interfaces/route.interface,';
 
-export class Server {
+class Server {
     public app: Application;
     public port: string | number;
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
@@ -49,3 +49,5 @@ export class Server {
         this.app.use(errorMiddleware);
     }
 }
+
+export default Server;

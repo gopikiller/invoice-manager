@@ -1,4 +1,4 @@
-import { Server } from './components/Server';
+import Server from './components/Server';
 import HealthCheck from './routes/healthcheck.route';
 import validateEnv from './utils/validEnv';
 
