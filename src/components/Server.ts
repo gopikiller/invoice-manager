@@ -6,16 +6,18 @@ import cors from 'cors';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import errorMiddleware from '../middleware/error.middleware';
+import { Routes } from '../interfaces/route.interface,';
 
 export class Server {
     public app: Application;
     public port: string | number;
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 
-    constructor() {
+    constructor(routes: Routes[]) {
         this.app = express();
         this.port = PORT || 3000;
         this.initializeMiddlewares();
+        this.initializeRoutes(routes);
         this.initializeErrorHandling();
         this.server = http.createServer(this.app);
     }
@@ -35,6 +37,12 @@ export class Server {
         this.app.use(helmet());
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+    }
+
+    private initializeRoutes(routes: Routes[]) {
+        routes.forEach(route => {
+            this.app.use('/', route.router);
+        });
     }
 
     private initializeErrorHandling() {
