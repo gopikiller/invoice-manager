@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import Server from './components/Server';
 import routes from './routes';
 import validateEnv from './utils/validEnv';
