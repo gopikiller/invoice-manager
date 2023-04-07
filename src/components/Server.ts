@@ -1,12 +1,13 @@
+import cors from 'cors';
 import express, { Application } from 'express';
+import helmet from 'helmet';
+import hpp from 'hpp';
 import http from 'http';
 import * as v8 from 'v8';
+
 import { CREDENTIALS, ORIGIN, PORT } from '../config';
-import cors from 'cors';
-import hpp from 'hpp';
-import helmet from 'helmet';
-import errorMiddleware from '../middleware/error.middleware';
 import { Routes } from '../interfaces/route.interface,';
+import errorMiddleware from '../middleware/error.middleware';
 
 class Server {
     public app: Application;
