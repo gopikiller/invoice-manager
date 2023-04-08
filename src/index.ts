@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 
-import Database from './components/Database';
 import Server from './components/Server';
 import AppDataSource from './database';
+import Database from './database/Database';
 import routes from './routes';
 import validateEnv from './utils/validEnv';
 
