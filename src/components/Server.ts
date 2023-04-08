@@ -6,7 +6,7 @@ import http from 'http';
 import * as v8 from 'v8';
 
 import { CREDENTIALS, ORIGIN, PORT } from '../config';
-import { Routes } from '../interfaces/route.interface,';
+import { Routes } from '../interfaces/route.interface';
 import errorMiddleware from '../middleware/error.middleware';
 
 class Server {

@@ -1,4 +1,3 @@
-import { dirname } from 'path';
 import { DataSource } from 'typeorm';
 
 const AppDataSource = new DataSource({
@@ -10,8 +9,8 @@ const AppDataSource = new DataSource({
     database: 'node-express',
     synchronize: false,
     logging: true,
-    entities: [`${__dirname}/entities/*.{js,ts}}`],
-    migrations: [`${__dirname}/migrations/*.{js,ts}}`],
+    entities: [`${__dirname}/entities/*.{js,ts}`],
+    migrations: [`${__dirname}/migrations/*.{js,ts}`],
     subscribers: [],
 });
 
