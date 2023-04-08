@@ -1,3 +1,4 @@
+import { createTerminus } from '@godaddy/terminus';
 import cors from 'cors';
 import express, { Application } from 'express';
 import helmet from 'helmet';
@@ -14,13 +15,19 @@ class Server {
     public port: string | number;
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 
-    constructor(routes: Routes[]) {
+    constructor(routes: Routes[], disconnectDb: () => Promise<void>) {
         this.app = express();
         this.port = PORT || 3000;
         this.initializeMiddlewares();
         this.initializeRoutes(routes);
         this.initializeErrorHandling();
         this.server = http.createServer(this.app);
+        this.initializeCreateTerminus(disconnectDb);
+        this.listenToServerEvents();
+    }
+
+    public getServer() {
+        return this.server;
     }
 
     public listen() {
@@ -49,6 +56,31 @@ class Server {
 
     private initializeErrorHandling() {
         this.app.use(errorMiddleware);
+    }
+
+    private initializeCreateTerminus(disconnectDb: () => Promise<void>) {
+        createTerminus(this.server, {
+            timeout: 10000,
+            signals: ['SIGTERM', 'SIGINT'],
+            logger: (msg, err) => {
+                if (err) {
+                    console.log(err.message);
+                    console.log(msg);
+                } else {
+                    console.log(msg);
+                }
+            },
+            onSignal: disconnectDb,
+            onShutdown: async () => {
+                console.log(`[Server.onShutdown]: All signals handled`);
+            },
+        });
+    }
+
+    private listenToServerEvents() {
+        this.server.on('close', () => {
+            console.log('[Server.listenToServerEvents]: Server is closed from accepting new request');
+        });
     }
 }
 

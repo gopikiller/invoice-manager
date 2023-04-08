@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import Database from './components/Database';
 import Server from './components/Server';
 import AppDataSource from './database';
 import routes from './routes';
@@ -7,9 +8,9 @@ import validateEnv from './utils/validEnv';
 
 validateEnv();
 
-const app = new Server(routes);
+const db = new Database(AppDataSource);
+const app = new Server(routes, () => db.removeDbConnection());
 
-AppDataSource.initialize()
-    .then(dataSource => dataSource.runMigrations({ transaction: 'each' }))
+db.initializeDb()
     .then(() => app.listen())
-    .catch(e => console.log(e));
+    .catch(e => console.log('Error connecting to Database' + e));

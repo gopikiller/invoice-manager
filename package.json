@@ -26,6 +26,7 @@
         "node": "18"
     },
     "dependencies": {
+        "@godaddy/terminus": "^4.11.2",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "envalid": "^7.3.1",
