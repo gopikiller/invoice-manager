@@ -9,7 +9,8 @@ import validateEnv from './utils/validEnv';
 validateEnv();
 
 const db = new Database(AppDataSource);
-const app = new Server(routes, () => db.removeDbConnection());
+const onConnectionClose = () => db.removeDbConnection();
+const app = new Server(routes, onConnectionClose);
 
 db.initializeDb()
     .then(() => app.listen())

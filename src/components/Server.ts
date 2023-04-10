@@ -7,17 +7,21 @@ import http from 'http';
 import * as v8 from 'v8';
 
 import { CREDENTIALS, ORIGIN, PORT } from '../config';
+import { AppLogger } from '../interfaces/logger.interface';
 import { Routes } from '../interfaces/route.interface';
 import errorMiddleware from '../middleware/error.middleware';
+import logger from '../utils/logger';
 
 class Server {
     public app: Application;
     public port: string | number;
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
+    private logger: AppLogger;
 
     constructor(routes: Routes[], disconnectDb: () => Promise<void>) {
         this.app = express();
         this.port = PORT || 3000;
+        this.logger = logger();
         this.initializeMiddlewares();
         this.initializeRoutes(routes);
         this.initializeErrorHandling();
@@ -64,22 +68,22 @@ class Server {
             signals: ['SIGTERM', 'SIGINT'],
             logger: (msg, err) => {
                 if (err) {
-                    console.log(err.message);
-                    console.log(msg);
+                    this.logger.error(err.message);
+                    this.logger.info(msg);
                 } else {
-                    console.log(msg);
+                    this.logger.info(msg);
                 }
             },
             onSignal: disconnectDb,
             onShutdown: async () => {
-                console.log(`[Server.onShutdown]: All signals handled`);
+                this.logger.info(`[Server.onShutdown]: All signals handled`);
             },
         });
     }
 
     private listenToServerEvents() {
         this.server.on('close', () => {
-            console.log('[Server.listenToServerEvents]: Server is closed from accepting new request');
+            this.logger.info('[Server.listenToServerEvents]: Server is closed from accepting new request');
         });
     }
 }

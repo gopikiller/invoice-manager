@@ -1,15 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { HttpException } from '../utils/HttpException';
+import logger from '../utils/logger';
 
 const errorMiddleware = (exception: HttpException, req: Request, res: Response, next: NextFunction) => {
+    const log = logger();
     try {
         const status: number = exception.status || 500;
         const message: string = exception.message || 'Something went wrong';
 
-        console.log(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
+        log.info({ method: req.method, path: req.path, statusCode: status }, message);
         res.status(status).json({ message });
     } catch (error) {
+        log.error(error);
         next(error);
     }
 };

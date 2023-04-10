@@ -1,20 +1,25 @@
 import { DataSource } from 'typeorm';
 
+import { AppLogger } from '../interfaces/logger.interface';
+import logger from '../utils/logger';
+
 class Database {
     private dataSource: DataSource;
+    private logger: AppLogger;
     constructor(dataSource: DataSource) {
         this.dataSource = dataSource;
+        this.logger = logger();
     }
 
     public async initializeDb() {
         await this.dataSource.initialize();
         await this.dataSource.runMigrations({ transaction: 'each' });
-        console.log(`[Database.initializeDb] : Database connection is succesfull`);
+        this.logger.info(`[Database.initializeDb] : Database connection is succesfull`);
     }
 
     public async removeDbConnection() {
         await this.dataSource.destroy();
-        console.log(`[Database.removeDbConnection] : Database connection removed`);
+        this.logger.info(`[Database.removeDbConnection] : Database connection removed`);
     }
 }
 
