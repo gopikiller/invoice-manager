@@ -29,21 +29,22 @@ const logger = () => {
     }
 
     const timestamp = () => `,"time":"${new Date(Date.now()).toISOString()}"`;
-    const transportOption: TransportMultiOptions = {
-        targets: [
-            {
-                level: 'debug',
-                target: 'pino/file',
-                options: { destination: logDir + '/debug.log' },
-            },
-            {
-                level: 'error',
-                target: 'pino/file',
-                options: { destination: logDir + '/error.log' },
-            },
-        ],
-    };
-    return new Logger(pino({ level: 'debug', timestamp }, transport(transportOption)));
+    // const transportOption: TransportMultiOptions = {
+    //     targets: [
+    //         {
+    //             level: 'debug',
+    //             target: 'pino/file',
+    //             options: { destination: logDir + '/debug.log' },
+    //         },
+    //         {
+    //             level: 'error',
+    //             target: 'pino/file',
+    //             options: { destination: logDir + '/error.log' },
+    //         },
+    //     ],
+    // };
+    // return new Logger(pino({ level: 'debug', timestamp }, transport(transportOption)));
+    return new Logger(pino({ level: 'debug', timestamp }));
 };
 
 export default logger;
