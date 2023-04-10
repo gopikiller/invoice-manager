@@ -16,11 +16,7 @@ class HealthCheck implements Routes {
 
     private initializeRoutes() {
         this.router.get(`${this.path}healthcheck`, (_req, res) => {
-            this.logger.info('info');
-            this.logger.warn('warn');
-            this.logger.error('error');
-            this.logger.debug('debug');
-            res.status(200).json({ status: 'ok' });
+            res.status(200).json({ status: 'ok', is_healthy: true });
             return;
         });
     }
