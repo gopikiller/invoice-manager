@@ -26,16 +26,13 @@ export const openapi: OpenApiValidatorOpts = {
     validateRequests: true,
     validateResponses: true,
     operationHandlers: path.join(__dirname, '../controllers/'),
-    // validateSecurity: {
-    //     handlers: {
-    //         BearerAuth: async (req, roles, schema) => {
-    //             const handlerResp = await getAuthorisor().authorizationHandler(req, roles);
-    //             if (handlerResp.status >= 400) {
-    //                 throw { status: handlerResp.status, message: handlerResp.message?.error_message };
-    //             }
-
-    //             return true;
-    //         },
-    //     },
-    // },
+    validateSecurity: {
+        handlers: {
+            BearerAuth: async (req, roles, schema) => {
+                // Auth controller goes here
+                console.log(roles, schema);
+                return true;
+            },
+        },
+    },
 };
