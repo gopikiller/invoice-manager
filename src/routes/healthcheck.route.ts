@@ -1,17 +1,13 @@
 import { Router } from 'express';
 
-import { AppLogger } from '../interfaces/logger.interface';
 import { Routes } from '../interfaces/route.interface';
-import logger from '../utils/logger';
 
 class HealthCheck implements Routes {
     public path = '/';
     public router = Router();
-    private logger: AppLogger;
 
     constructor() {
         this.initializeRoutes();
-        this.logger = logger();
     }
 
     private initializeRoutes() {
