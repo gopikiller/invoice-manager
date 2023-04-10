@@ -20,6 +20,7 @@
         "format:fix": "prettier --write \"src/**/*.{ts,json}\"",
         "lint": "eslint --ext .ts,.json .",
         "lint:fix": "eslint --ext .ts,.json . --fix",
+        "schema": "ts-node src/openapi/generator.ts",
         "typeorm": "typeorm-ts-node-esm"
     },
     "engines": {
@@ -54,6 +55,7 @@
         "eslint-plugin-simple-import-sort": "^10.0.0",
         "nodemon": "^2.0.22",
         "openapi-types": "^12.1.0",
+        "openapi-typescript": "^4.5.0",
         "prettier": "^2.8.7",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.3"
