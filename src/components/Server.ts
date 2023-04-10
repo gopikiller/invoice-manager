@@ -1,15 +1,17 @@
 import { createTerminus } from '@godaddy/terminus';
 import cors from 'cors';
 import express, { Application } from 'express';
+import { middleware } from 'express-openapi-validator';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
+import { serve, setup } from 'swagger-ui-express';
 import * as v8 from 'v8';
 
 import { CREDENTIALS, ORIGIN, PORT } from '../config';
 import { AppLogger } from '../interfaces/logger.interface';
-import { Routes } from '../interfaces/route.interface';
 import errorMiddleware from '../middleware/error.middleware';
+import * as openApiSpec from '../openapi';
 import logger from '../utils/logger';
 
 class Server {
@@ -18,12 +20,12 @@ class Server {
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
     private logger: AppLogger;
 
-    constructor(routes: Routes[], disconnectDb: () => Promise<void>) {
+    constructor(disconnectDb: () => Promise<void>) {
         this.app = express();
         this.port = PORT || 3000;
         this.logger = logger();
         this.initializeMiddlewares();
-        this.initializeRoutes(routes);
+        this.initializeOpenApi();
         this.initializeErrorHandling();
         this.server = http.createServer(this.app);
         this.initializeCreateTerminus(disconnectDb);
@@ -52,10 +54,9 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
     }
 
-    private initializeRoutes(routes: Routes[]) {
-        routes.forEach(route => {
-            this.app.use('/', route.router);
-        });
+    private initializeOpenApi() {
+        this.app.use('/api-docs', serve, setup(openApiSpec.spec));
+        this.app.use(middleware(openApiSpec.openapi));
     }
 
     private initializeErrorHandling() {
