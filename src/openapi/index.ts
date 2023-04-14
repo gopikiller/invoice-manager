@@ -2,6 +2,7 @@ import { OpenAPIV3 as ExpressOpenAPIV3, OpenApiValidatorOpts } from 'express-ope
 import { OpenAPIV3 } from 'openapi-types';
 import * as path from 'path';
 
+import AuthMiddleware from '../middleware/auth.middleware';
 import { components } from './components';
 import paths from './paths';
 
@@ -29,8 +30,10 @@ export const openapi: OpenApiValidatorOpts = {
     validateSecurity: {
         handlers: {
             BearerAuth: async (req, roles, schema) => {
-                // Auth controller goes here
-                console.log(roles, schema);
+                const authMiddleware = await new AuthMiddleware().authorizationHandler(req, roles);
+                if (authMiddleware.status >= 400) {
+                    throw { status: authMiddleware.status, message: authMiddleware.message };
+                }
                 return true;
             },
         },
