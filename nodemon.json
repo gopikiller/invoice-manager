@@ -5,12 +5,8 @@
     "exec": "ts-node --transpile-only ./src/index.ts",
     "env": {
         "NODE_ENV": "development",
+        "DB_URL": "postgres://dummy:dummy@127.0.0.1:5432/dummy",
         "PORT": 3000,
-        "SECRET_KEY": "dummy",
-        "DB_HOST": "localhost",
-        "DB_PORT": 5432,
-        "DB_USERNAME": "dummy",
-        "DB_PASSWORD": "dummy",
-        "DB_DATABASE": "dummy"
+        "SECRET_KEY": "dummy"
     }
 }

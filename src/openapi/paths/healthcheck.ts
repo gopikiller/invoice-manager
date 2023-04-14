@@ -3,7 +3,7 @@ import { PathsObjectV2 } from '../../interfaces/openapi.interface';
 export const path: PathsObjectV2 = {
     '/healthcheck': {
         get: {
-            'x-eov-operation-handler': 'HealthCheckV2.controller',
+            'x-eov-operation-handler': 'healthcheck.controller',
             operationId: 'healthCheck',
             tags: ['Health Check'],
             security: [

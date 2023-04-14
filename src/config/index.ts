@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config();
 
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
-export const { NODE_ENV, PORT, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN } = process.env;
+export const { NODE_ENV, PORT, DB_URL, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN } = process.env;
 
 // http://www.restapitutorial.com/httpstatuscodes.html
 // https://gist.github.com/subfuzion/669dfae1d1a27de83e69
