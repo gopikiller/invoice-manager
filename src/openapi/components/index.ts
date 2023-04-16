@@ -36,5 +36,39 @@ export const components: OpenAPIV3.ComponentsObject = {
                 },
             },
         },
+        Customer: {
+            type: 'object',
+            required: ['name', 'email'],
+            properties: {
+                customerId: {
+                    type: 'string',
+                },
+                name: {
+                    type: 'string',
+                },
+                email: {
+                    type: 'string',
+                },
+                address: {
+                    type: 'string',
+                    nullable: true,
+                },
+                phone: {
+                    type: 'string',
+                    nullable: true,
+                },
+                createdAt: {
+                    $ref: '#/components/schemas/datetime',
+                },
+                updatedAt: {
+                    $ref: '#/components/schemas/datetime',
+                },
+            },
+        },
+        datetime: {
+            type: 'string',
+            format: 'date-time',
+            description: 'date time of the entity',
+        },
     },
 };
