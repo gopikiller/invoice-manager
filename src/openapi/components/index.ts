@@ -14,25 +14,10 @@ export const components: OpenAPIV3.ComponentsObject = {
             required: ['error_code', 'error_message'],
             properties: {
                 error_code: {
-                    type: 'string',
+                    type: 'number',
                 },
                 error_message: {
                     type: 'string',
-                },
-            },
-        },
-        HealthCheck: {
-            type: 'object',
-            required: ['status', 'message', 'is_healthy'],
-            properties: {
-                status: {
-                    type: 'number',
-                },
-                message: {
-                    type: 'string',
-                },
-                is_healthy: {
-                    type: 'boolean',
                 },
             },
         },
@@ -69,6 +54,12 @@ export const components: OpenAPIV3.ComponentsObject = {
             type: 'string',
             format: 'date-time',
             description: 'date time of the entity',
+        },
+        customerId: {
+            type: 'string',
+            format: 'uuid',
+            description: 'Unique identifier of the customer',
+            example: 'a75048e9-a243-4661-8c4b-f95b7cc25437',
         },
     },
 };

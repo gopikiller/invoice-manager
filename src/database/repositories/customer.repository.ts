@@ -7,8 +7,12 @@ class CustomerRepository extends Repository<Customers> {
         return await this.save(customerData);
     };
 
+    getAllCustomers = async () => {
+        return await this.createQueryBuilder().getMany();
+    };
+
     getCustomerById = async (id: Customers['customerId']) => {
-        return await this.findOne({ where: { customerId: id }, relations: { invoices: true } });
+        return await this.findOne({ where: { customerId: id } });
     };
 
     getCustomerByName = async (name: Customers['name']) => {

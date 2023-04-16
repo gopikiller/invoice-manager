@@ -8,3 +8,4 @@ export const createCustomer = customerRepository.createCustomer.bind(customerRep
 export const getCustomerById = customerRepository.getCustomerById.bind(customerRepository);
 export const getCustomerByEmail = customerRepository.getCustomerByEmail.bind(customerRepository);
 export const getCustomerByName = customerRepository.getCustomerByName.bind(customerRepository);
+export const getAllCustomers = customerRepository.getAllCustomers.bind(customerRepository);

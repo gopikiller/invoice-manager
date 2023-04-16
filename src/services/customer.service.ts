@@ -1,5 +1,5 @@
 import type { Customers } from '../database/entities/customers';
-import { createCustomer, getCustomerByEmail, getCustomerById, getCustomerByName } from '../database/repositories';
+import { createCustomer, getAllCustomers, getCustomerByEmail, getCustomerById, getCustomerByName } from '../database/repositories';
 
 class CustomerService {
     public async createCustomer(customerData: Customers) {
@@ -22,12 +22,12 @@ class CustomerService {
         return customer;
     }
 
-    public async getCustomer(id: Customers['customerId']) {
-        const singleCustomer = await getCustomerById(id);
-        if (!singleCustomer) {
-            throw new Error(`Customer with id: ${id} is not found`);
-        }
-        return singleCustomer;
+    public async getCustomerById(id: Customers['customerId']) {
+        return await getCustomerById(id);
+    }
+
+    public async getAllCustomers() {
+        return await getAllCustomers();
     }
 }
 

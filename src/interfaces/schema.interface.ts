@@ -4,24 +4,20 @@
  */
 
 export interface paths {
-  "/healthcheck": {
-    get: operations["healthCheck"];
-  };
   "/customer": {
+    get: operations["getCustomers"];
     post: operations["createCustomer"];
+  };
+  "/customer/{customerId}": {
+    get: operations["getCustomerById"];
   };
 }
 
 export interface components {
   schemas: {
     Error: {
-      error_code: string;
+      error_code: number;
       error_message: string;
-    };
-    HealthCheck: {
-      status: number;
-      message: string;
-      is_healthy: boolean;
     };
     Customer: {
       customerId?: string;
@@ -41,12 +37,12 @@ export interface components {
 }
 
 export interface operations {
-  healthCheck: {
+  getCustomers: {
     responses: {
-      /** Check health of the application */
+      /** Get all customers */
       200: {
         content: {
-          "application/json": components["schemas"]["HealthCheck"];
+          "application/json": components["schemas"]["Customer"][];
         };
       };
       401: {
@@ -77,10 +73,7 @@ export interface operations {
       /** Failed request */
       400: {
         content: {
-          "application/json": {
-            error_code: number;
-            error_message: string;
-          };
+          "application/json": components["schemas"]["Error"];
         };
       };
       401: {
@@ -103,6 +96,41 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["Customer"];
+      };
+    };
+  };
+  getCustomerById: {
+    parameters: {
+      path: {
+        customerId: string;
+      };
+    };
+    responses: {
+      /** Get customer by ID */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Customer"];
+        };
+      };
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
       };
     };
   };

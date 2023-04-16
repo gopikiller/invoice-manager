@@ -6,6 +6,7 @@ export const path: PathsObjectV2 = {
             'x-eov-operation-handler': 'customer.controller',
             operationId: 'createCustomer',
             tags: ['Customer'],
+            summary: 'Create customer',
             requestBody: {
                 description: 'To create new customer',
                 required: true,
@@ -33,21 +34,140 @@ export const path: PathsObjectV2 = {
                     content: {
                         'application/json': {
                             schema: {
-                                type: 'object',
-                                required: ['error_code', 'error_message'],
-                                properties: {
-                                    error_code: {
-                                        type: 'number',
-                                    },
-                                    error_message: {
-                                        type: 'string',
-                                    },
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '404': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '409': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '401': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        get: {
+            'x-eov-operation-handler': 'customer.controller',
+            operationId: 'getCustomers',
+            tags: ['Customer'],
+            summary: 'Get customers',
+            responses: {
+                '200': {
+                    description: 'Get all customers',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'array',
+                                items: {
+                                    $ref: '#/components/schemas/Customer',
                                 },
                             },
                         },
                     },
                 },
                 '404': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '409': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '401': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+    '/customer/{customerId}': {
+        get: {
+            'x-eov-operation-handler': 'customer.controller',
+            operationId: 'getCustomerById',
+            summary: 'Get customer by customerId',
+            tags: ['Customer'],
+            parameters: [
+                {
+                    in: 'path',
+                    required: true,
+                    name: 'customerId',
+                    schema: {
+                        $ref: '#/components/schemas/customerId',
+                    },
+                },
+            ],
+            responses: {
+                '200': {
+                    description: 'Get customer by ID',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Customer',
+                            },
+                        },
+                    },
+                },
+                '404': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '400': {
                     description: '',
                     headers: {},
                     content: {
