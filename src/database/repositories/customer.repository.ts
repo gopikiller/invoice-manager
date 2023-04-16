@@ -22,6 +22,14 @@ class CustomerRepository extends Repository<Customers> {
     getCustomerByEmail = async (email: Customers['email']) => {
         return await this.findOne({ where: { email } });
     };
+
+    updateCustomerById = async (id: Customers['customerId'], updatedata: Partial<Customers>) => {
+        return await this.update(id, updatedata);
+    };
+
+    deleteCustomerById = async (id: Customers['customerId']) => {
+        return await this.delete(id);
+    };
 }
 
 export default CustomerRepository;

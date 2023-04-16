@@ -9,3 +9,5 @@ export const getCustomerById = customerRepository.getCustomerById.bind(customerR
 export const getCustomerByEmail = customerRepository.getCustomerByEmail.bind(customerRepository);
 export const getCustomerByName = customerRepository.getCustomerByName.bind(customerRepository);
 export const getAllCustomers = customerRepository.getAllCustomers.bind(customerRepository);
+export const updateCustomerById = customerRepository.updateCustomerById.bind(customerRepository);
+export const deleteCustomerById = customerRepository.deleteCustomerById.bind(customerRepository);

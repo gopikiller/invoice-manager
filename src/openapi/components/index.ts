@@ -33,6 +33,7 @@ export const components: OpenAPIV3.ComponentsObject = {
                 },
                 email: {
                     type: 'string',
+                    format: 'email',
                 },
                 address: {
                     type: 'string',

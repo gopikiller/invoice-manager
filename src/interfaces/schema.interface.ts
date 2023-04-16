@@ -10,6 +10,8 @@ export interface paths {
   };
   "/customer/{customerId}": {
     get: operations["getCustomerById"];
+    delete: operations["deleteCustomerById"];
+    patch: operations["updateCustomerById"];
   };
 }
 
@@ -22,6 +24,7 @@ export interface components {
     Customer: {
       customerId?: string;
       name: string;
+      /** Format: email */
       email: string;
       address?: string | null;
       phone?: string | null;
@@ -33,6 +36,12 @@ export interface components {
      * @description date time of the entity
      */
     datetime: Date;
+    /**
+     * Format: uuid
+     * @description Unique identifier of the customer
+     * @example a75048e9-a243-4661-8c4b-f95b7cc25437
+     */
+    customerId: string;
   };
 }
 
@@ -102,7 +111,7 @@ export interface operations {
   getCustomerById: {
     parameters: {
       path: {
-        customerId: string;
+        customerId: components["schemas"]["customerId"];
       };
     };
     responses: {
@@ -131,6 +140,78 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["Error"];
         };
+      };
+    };
+  };
+  deleteCustomerById: {
+    parameters: {
+      path: {
+        customerId: components["schemas"]["customerId"];
+      };
+    };
+    responses: {
+      /** Sucessfully deleted customer */
+      204: never;
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  updateCustomerById: {
+    parameters: {
+      path: {
+        customerId: components["schemas"]["customerId"];
+      };
+    };
+    responses: {
+      /** updated customer response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Customer"];
+        };
+      };
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+    /** JSON object to update customer */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Customer"];
       };
     };
   };

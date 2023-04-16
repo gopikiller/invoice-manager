@@ -202,5 +202,153 @@ export const path: PathsObjectV2 = {
                 },
             },
         },
+        patch: {
+            'x-eov-operation-handler': 'customer.controller',
+            operationId: 'updateCustomerById',
+            summary: 'Update customer by customerId',
+            tags: ['Customer'],
+            parameters: [
+                {
+                    in: 'path',
+                    required: true,
+                    name: 'customerId',
+                    schema: {
+                        $ref: '#/components/schemas/customerId',
+                    },
+                },
+            ],
+            requestBody: {
+                description: 'JSON object to update customer',
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            $ref: '#/components/schemas/Customer',
+                        },
+                    },
+                },
+            },
+            responses: {
+                '200': {
+                    description: 'updated customer response',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Customer',
+                            },
+                        },
+                    },
+                },
+                '404': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '400': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '409': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '401': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        delete: {
+            'x-eov-operation-handler': 'customer.controller',
+            operationId: 'deleteCustomerById',
+            summary: 'Delete customer by customerId',
+            tags: ['Customer'],
+            parameters: [
+                {
+                    in: 'path',
+                    required: true,
+                    name: 'customerId',
+                    schema: {
+                        $ref: '#/components/schemas/customerId',
+                    },
+                },
+            ],
+            responses: {
+                '204': {
+                    description: 'Sucessfully deleted customer',
+                },
+                '404': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '400': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '409': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+                '401': {
+                    description: '',
+                    headers: {},
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Error',
+                            },
+                        },
+                    },
+                },
+            },
+        },
     },
 };
