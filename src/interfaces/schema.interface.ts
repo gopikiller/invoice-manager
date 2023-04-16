@@ -7,6 +7,9 @@ export interface paths {
   "/healthcheck": {
     get: operations["healthCheck"];
   };
+  "/customer": {
+    post: operations["createCustomer"];
+  };
 }
 
 export interface components {
@@ -20,6 +23,20 @@ export interface components {
       message: string;
       is_healthy: boolean;
     };
+    Customer: {
+      customerId?: string;
+      name: string;
+      email: string;
+      address?: string | null;
+      phone?: string | null;
+      createdAt?: components["schemas"]["datetime"];
+      updatedAt?: components["schemas"]["datetime"];
+    };
+    /**
+     * Format: date-time
+     * @description date time of the entity
+     */
+    datetime: Date;
   };
 }
 
@@ -46,6 +63,46 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["Error"];
         };
+      };
+    };
+  };
+  createCustomer: {
+    responses: {
+      /** Created customer datas */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Customer"];
+        };
+      };
+      /** Failed request */
+      400: {
+        content: {
+          "application/json": {
+            error_code: number;
+            error_message: string;
+          };
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+    /** To create new customer */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Customer"];
       };
     };
   };

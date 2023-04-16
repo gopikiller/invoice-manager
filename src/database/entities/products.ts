@@ -9,7 +9,7 @@ export class Products {
     name: string;
 
     @Column('text', { name: 'description', nullable: true })
-    description: string;
+    description: string | null;
 
     @Column('boolean', { name: 'active', default: false, nullable: false })
     active: boolean;

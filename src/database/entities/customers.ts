@@ -13,11 +13,11 @@ export class Customers {
     @Column('text', { name: 'email', nullable: false, unique: true })
     email: string;
 
-    @Column('text', { name: 'phone', unique: true })
-    phone: string;
+    @Column('text', { name: 'phone', nullable: true })
+    phone: string | null;
 
-    @Column('text', { name: 'address', nullable: false })
-    address: string;
+    @Column('text', { name: 'address', nullable: true })
+    address: string | null;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp without time zone' })
     createdAt: Date;
