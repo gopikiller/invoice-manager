@@ -22,7 +22,7 @@
         "lint:fix": "eslint --ext .ts,.json . --fix",
         "schema": "ts-node src/openapi/generator.ts",
         "typeorm": "typeorm-ts-node-esm",
-        "db:diagram": "typeorm-uml ormconfig.json -f=svg --download=db-diagram.svg"
+        "db:diagram": "npm run build && typeorm-uml ormconfig.json -f=svg --download=db-diagram.svg"
     },
     "engines": {
         "node": "18"

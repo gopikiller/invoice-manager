@@ -12,7 +12,11 @@ class Database {
     }
 
     public async initializeDb() {
+        // initialize database connection
         await this.dataSource.initialize();
+        // create invoice schema
+        await this.dataSource.query(`CREATE SCHEMA IF NOT EXISTS invoice`);
+        // run migration
         await this.dataSource.runMigrations({ transaction: 'each' });
         this.logger.info(`[Database.initializeDb] : Database connection is succesfull`);
     }

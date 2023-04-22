@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('products')
 export class Products {
@@ -16,4 +16,10 @@ export class Products {
 
     @Column('decimal', { name: 'price', nullable: false })
     price: number;
+
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp without time zone' })
+    createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp without time zone' })
+    updatedAt: Date;
 }
