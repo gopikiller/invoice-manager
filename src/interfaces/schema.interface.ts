@@ -22,8 +22,7 @@ export interface components {
       error_message: string;
     };
     Customer: {
-      /** Format: uuid */
-      customerId?: string;
+      customerId?: components["schemas"]["customerId"];
       name: string;
       /** Format: email */
       email: string;

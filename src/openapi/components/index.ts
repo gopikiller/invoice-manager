@@ -26,8 +26,7 @@ export const components: OpenAPIV3.ComponentsObject = {
             required: ['name', 'email'],
             properties: {
                 customerId: {
-                    type: 'string',
-                    format: 'uuid',
+                    $ref: '#/components/schemas/customerId',
                 },
                 name: {
                     type: 'string',
