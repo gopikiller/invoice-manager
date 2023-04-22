@@ -19,7 +19,7 @@ export const path: PathsObjectV2 = {
                 },
             },
             responses: {
-                '200': {
+                '201': {
                     description: 'Created customer datas',
                     content: {
                         'application/json': {

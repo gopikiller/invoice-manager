@@ -46,7 +46,7 @@ class CustomerController {
 
     post = async (
         req: Request<any, any, operations['createCustomer']['requestBody']['content']['application/json']>,
-        res: Response<operations['createCustomer']['responses']['200']['content']['application/json'] | components['schemas']['Error']>,
+        res: Response<operations['createCustomer']['responses']['201']['content']['application/json'] | components['schemas']['Error']>,
     ) => {
         const customerRequest = req.body as Customers;
 

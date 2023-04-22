@@ -19,6 +19,9 @@ export class Customers {
     @Column('text', { name: 'address', nullable: true })
     address: string | null;
 
+    @Column('boolean', { name: 'active', default: true })
+    active: boolean;
+
     @CreateDateColumn({ name: 'created_at', type: 'timestamp without time zone' })
     createdAt: Date;
 

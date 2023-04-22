@@ -22,12 +22,14 @@ export interface components {
       error_message: string;
     };
     Customer: {
+      /** Format: uuid */
       customerId?: string;
       name: string;
       /** Format: email */
       email: string;
       address?: string | null;
       phone?: string | null;
+      active?: boolean;
       createdAt?: components["schemas"]["datetime"];
       updatedAt?: components["schemas"]["datetime"];
     };
@@ -74,7 +76,7 @@ export interface operations {
   createCustomer: {
     responses: {
       /** Created customer datas */
-      200: {
+      201: {
         content: {
           "application/json": components["schemas"]["Customer"];
         };

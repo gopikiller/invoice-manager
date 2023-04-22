@@ -8,7 +8,7 @@ class CustomerRepository extends Repository<Customers> {
     };
 
     getAllCustomers = async () => {
-        return await this.createQueryBuilder().getMany();
+        return await this.createQueryBuilder().where({ active: true }).getMany();
     };
 
     getCustomerById = async (id: Customers['customerId']) => {
@@ -24,7 +24,7 @@ class CustomerRepository extends Repository<Customers> {
     };
 
     updateCustomerById = async (id: Customers['customerId'], updatedata: Partial<Customers>) => {
-        return await this.update(id, updatedata);
+        return await this.update({ customerId: id }, updatedata);
     };
 
     deleteCustomerById = async (id: Customers['customerId']) => {

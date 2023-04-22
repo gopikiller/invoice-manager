@@ -27,6 +27,7 @@ export const components: OpenAPIV3.ComponentsObject = {
             properties: {
                 customerId: {
                     type: 'string',
+                    format: 'uuid',
                 },
                 name: {
                     type: 'string',
@@ -42,6 +43,9 @@ export const components: OpenAPIV3.ComponentsObject = {
                 phone: {
                     type: 'string',
                     nullable: true,
+                },
+                active:{
+                    type: 'boolean'
                 },
                 createdAt: {
                     $ref: '#/components/schemas/datetime',
