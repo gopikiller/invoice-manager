@@ -1,0 +1,7 @@
+{
+    "type": "postgres",
+    "url":"postgres://dummy:dummy@127.0.0.1:5432/dummy",
+    "entities": [
+        "dist/database/entities/*.js"
+    ]
+}
