@@ -29,7 +29,7 @@
     },
     "dependencies": {
         "@godaddy/terminus": "^4.11.2",
-        "@gopikiller/winston-logger": "^1.0.1",
+        "@gopikiller/winston-logger": "^1.0.3",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "envalid": "^7.3.1",

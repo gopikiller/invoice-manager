@@ -1,4 +1,4 @@
-import { Logger, LoggerOption } from '@gopikiller/winston-logger/lib';
+import { Logger, LoggerOption } from '@gopikiller/winston-logger';
 
 const loggerOption: LoggerOption = {
     logFileName: 'node-express-server',

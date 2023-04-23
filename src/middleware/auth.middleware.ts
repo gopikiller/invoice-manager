@@ -1,4 +1,4 @@
-import { LoggerInterface } from '@gopikiller/winston-logger/lib';
+import { LoggerInterface } from '@gopikiller/winston-logger';
 import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
 import moment from 'moment';

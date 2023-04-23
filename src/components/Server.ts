@@ -1,5 +1,5 @@
 import { createTerminus } from '@godaddy/terminus';
-import { LoggerInterface } from '@gopikiller/winston-logger/lib';
+import { LoggerInterface } from '@gopikiller/winston-logger';
 import cors from 'cors';
 import express, { Application } from 'express';
 import { middleware } from 'express-openapi-validator';

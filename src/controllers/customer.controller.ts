@@ -1,4 +1,4 @@
-import { LoggerInterface } from '@gopikiller/winston-logger/lib';
+import { LoggerInterface } from '@gopikiller/winston-logger';
 import { Request, Response } from 'express';
 
 import { STATUS_CODE } from '../config';

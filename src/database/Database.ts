@@ -1,4 +1,4 @@
-import { LoggerInterface } from '@gopikiller/winston-logger/lib';
+import { LoggerInterface } from '@gopikiller/winston-logger';
 import { DataSource } from 'typeorm';
 
 import logger from '../utils/logger';
