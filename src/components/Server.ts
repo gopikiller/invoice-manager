@@ -1,4 +1,5 @@
 import { createTerminus } from '@godaddy/terminus';
+import { LoggerInterface } from '@gopikiller/winston-logger/lib';
 import cors from 'cors';
 import express, { Application } from 'express';
 import { middleware } from 'express-openapi-validator';
@@ -9,7 +10,6 @@ import { serve, setup } from 'swagger-ui-express';
 import * as v8 from 'v8';
 
 import { CREDENTIALS, ORIGIN, PORT } from '../config';
-import { AppLogger } from '../interfaces/logger.interface';
 import errorMiddleware from '../middleware/error.middleware';
 import * as openApiSpec from '../openapi';
 import logger from '../utils/logger';
@@ -18,12 +18,12 @@ class Server {
     public app: Application;
     public port: string | number;
     public server: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
-    private logger: AppLogger;
+    private logger: LoggerInterface;
 
     constructor(disconnectDb: () => Promise<void>) {
         this.app = express();
         this.port = PORT || 3000;
-        this.logger = logger();
+        this.logger = logger;
         this.initializeMiddlewares();
         this.initializeOpenApi();
         this.initializeErrorHandling();

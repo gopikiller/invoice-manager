@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@godaddy/terminus": "^4.11.2",
+        "@gopikiller/winston-logger": "^1.0.1",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "envalid": "^7.3.1",
@@ -39,7 +40,6 @@
         "jsonwebtoken": "^9.0.0",
         "moment": "^2.29.4",
         "pg": "^8.10.0",
-        "pino": "^8.11.0",
         "reflect-metadata": "^0.1.13",
         "swagger-ui-express": "^4.6.2",
         "typeorm": "^0.3.13"

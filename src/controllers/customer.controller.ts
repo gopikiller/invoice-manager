@@ -1,17 +1,17 @@
+import { LoggerInterface } from '@gopikiller/winston-logger/lib';
 import { Request, Response } from 'express';
 
 import { STATUS_CODE } from '../config';
 import type { Customers } from '../database/entities/customers';
-import { AppLogger } from '../interfaces/logger.interface';
 import { components, operations } from '../interfaces/schema.interface';
 import CustomerService from '../services/customer.service';
 import logger from '../utils/logger';
 
 class CustomerController {
     private readonly customerService = new CustomerService();
-    private readonly logger: AppLogger;
+    private readonly logger: LoggerInterface;
     constructor() {
-        this.logger = logger();
+        this.logger = logger;
     }
 
     index = async (req: Request, res: Response<operations['getCustomers']['responses']['200']['content']['application/json'] | components['schemas']['Error']>) => {

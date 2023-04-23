@@ -1,14 +1,14 @@
+import { LoggerInterface } from '@gopikiller/winston-logger/lib';
 import { DataSource } from 'typeorm';
 
-import { AppLogger } from '../interfaces/logger.interface';
 import logger from '../utils/logger';
 
 class Database {
     private dataSource: DataSource;
-    private logger: AppLogger;
+    private logger: LoggerInterface;
     constructor(dataSource: DataSource) {
         this.dataSource = dataSource;
-        this.logger = logger();
+        this.logger = logger;
     }
 
     public async initializeDb() {
