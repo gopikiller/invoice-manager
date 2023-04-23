@@ -13,6 +13,15 @@ export interface paths {
     delete: operations["deleteCustomerById"];
     patch: operations["updateCustomerById"];
   };
+  "/product": {
+    get: operations["getProducts"];
+    post: operations["createProduct"];
+  };
+  "/product/{productCode}": {
+    get: operations["getProductByProductCode"];
+    delete: operations["deleteProductById"];
+    patch: operations["updateProductByProductCode"];
+  };
 }
 
 export interface components {
@@ -32,6 +41,16 @@ export interface components {
       createdAt?: components["schemas"]["datetime"];
       updatedAt?: components["schemas"]["datetime"];
     };
+    Product: {
+      productId?: components["schemas"]["productId"];
+      productCode: components["schemas"]["productCode"];
+      name: string;
+      description?: string | null;
+      price: string;
+      active?: boolean;
+      createdAt?: components["schemas"]["datetime"];
+      updatedAt?: components["schemas"]["datetime"];
+    };
     /**
      * Format: date-time
      * @description date time of the entity
@@ -43,6 +62,12 @@ export interface components {
      * @example a75048e9-a243-4661-8c4b-f95b7cc25437
      */
     customerId: string;
+    /**
+     * Format: uuid
+     * @description Unique identifier of the product
+     */
+    productId: string;
+    productCode: string;
   };
 }
 
@@ -213,6 +238,175 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["Customer"];
+      };
+    };
+  };
+  getProducts: {
+    responses: {
+      /** Get all products */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Product"][];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  createProduct: {
+    responses: {
+      /** Created product datas */
+      201: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      /** Failed request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+    /** To create new product */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Product"];
+      };
+    };
+  };
+  getProductByProductCode: {
+    parameters: {
+      path: {
+        productCode: components["schemas"]["productCode"];
+      };
+    };
+    responses: {
+      /** Get product by productcode */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  deleteProductById: {
+    parameters: {
+      path: {
+        productCode: components["schemas"]["productCode"];
+      };
+    };
+    responses: {
+      /** Sucessfully deleted product */
+      204: never;
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  updateProductByProductCode: {
+    parameters: {
+      path: {
+        productCode: components["schemas"]["productCode"];
+      };
+    };
+    responses: {
+      /** updated product response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Product"];
+        };
+      };
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      409: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+    /** JSON object to update product */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Product"];
       };
     };
   };
