@@ -1,20 +1,20 @@
+import { LoggerInterface } from '@gopikiller/winston-logger/lib';
 import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
 import moment from 'moment';
 
 import { ReqHeaders, SECRET_KEY, STATUS_CODE } from '../config';
 import { Payload } from '../interfaces/jwt.interface';
-import { AppLogger } from '../interfaces/logger.interface';
 import logger from '../utils/logger';
 
 class AuthMiddleware {
     private secret: string;
-    private log: AppLogger;
+    private log: LoggerInterface;
     private now: number;
 
     constructor() {
         this.secret = this.getSecret();
-        this.log = logger();
+        this.log = logger;
         this.now = moment().unix();
     }
 

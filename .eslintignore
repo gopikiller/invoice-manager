@@ -1,3 +1,4 @@
 node_modules/
 dist/
 src/interfaces/schema.interface.ts
+log/
