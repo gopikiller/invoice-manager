@@ -76,13 +76,13 @@ class ProductController {
                 return;
             }
 
-            const updatedCustomer = await this.productService.updateProduct(productCode, productRequest);
-            if (!updatedCustomer) {
+            const updatedProduct = await this.productService.updateProduct(productCode, productRequest);
+            if (!updatedProduct) {
                 this.logger.error(`Failed to return updated product`);
                 res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({ error_code: STATUS_CODE.INTERNAL_SERVER_ERROR, error_message: 'Internal Server Error' });
                 return;
             }
-            res.status(STATUS_CODE.OK).json(updatedCustomer);
+            res.status(STATUS_CODE.OK).json(updatedProduct);
         } catch (err) {
             this.logger.error(err.message);
             res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({ error_code: STATUS_CODE.INTERNAL_SERVER_ERROR, error_message: 'Internal Server Error' });

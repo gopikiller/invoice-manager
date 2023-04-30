@@ -34,7 +34,6 @@ class ProductService {
         if (!updatedResult) {
             throw new Error(`Failed to update product details for productCode: ${productCode}`);
         }
-        console.log(updatedResult);
         return await this.getProductByProductCode(productCode);
     }
 
