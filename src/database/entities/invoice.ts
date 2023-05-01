@@ -1,11 +1,11 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { InvoiceStatus } from '../../types/invoice';
-import type { Customers } from './customers';
-import type { InvoiceItems } from './invoiceitems';
+import type { Customer } from './customer';
+import type { InvoiceItem } from './invoiceitem';
 
-@Entity('invoices')
-export class Invoices {
+@Entity('invoice')
+export class Invoice {
     @PrimaryGeneratedColumn('uuid', { name: 'invoiceid' })
     invoiceId: string;
 
@@ -24,10 +24,10 @@ export class Invoices {
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp without time zone' })
     updatedAt: Date;
 
-    @ManyToOne('Customers', (customer: Customers) => customer.invoices)
+    @ManyToOne('Customer', (customer: Customer) => customer.invoices)
     @JoinColumn({ name: 'customerId' })
-    customer: Customers;
+    customer: Customer;
 
-    @OneToMany('InvoiceItems', (invoiceitems: InvoiceItems) => invoiceitems.invoice)
-    invoiceitems: InvoiceItems[];
+    @OneToMany('InvoiceItem', (invoiceitems: InvoiceItem) => invoiceitems.invoice)
+    invoiceitem: InvoiceItem[];
 }

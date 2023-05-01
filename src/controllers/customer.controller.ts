@@ -2,7 +2,7 @@ import { LoggerInterface } from '@gopikiller/winston-logger';
 import { Request, Response } from 'express';
 
 import { STATUS_CODE } from '../config';
-import type { Customers } from '../database/entities/customers';
+import type { Customer } from '../database/entities/customer';
 import { components, operations } from '../interfaces/schema.interface';
 import CustomerService from '../services/customer.service';
 import logger from '../utils/logger';
@@ -48,7 +48,7 @@ class CustomerController {
         req: Request<any, any, operations['createCustomer']['requestBody']['content']['application/json']>,
         res: Response<operations['createCustomer']['responses']['201']['content']['application/json'] | components['schemas']['Error']>,
     ) => {
-        const customerRequest = req.body as Customers;
+        const customerRequest = req.body as Customer;
 
         try {
             const insertData = await this.customerService.createCustomer(customerRequest);
@@ -66,7 +66,7 @@ class CustomerController {
         res: Response<operations['updateCustomerById']['responses']['200']['content']['application/json'] | components['schemas']['Error']>,
     ) => {
         const { customerId } = req.params;
-        const customerRequest = req.body as Customers;
+        const customerRequest = req.body as Customer;
 
         try {
             const customer = await this.customerService.getCustomerById(customerId);

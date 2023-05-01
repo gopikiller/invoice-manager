@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import type { Invoices } from './invoices';
+import type { Invoice } from './invoice';
 
-@Entity('customers')
-export class Customers {
+@Entity('customer')
+export class Customer {
     @PrimaryGeneratedColumn('uuid', { name: 'customerid' })
     customerId: string;
 
@@ -28,6 +28,6 @@ export class Customers {
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp without time zone' })
     updatedAt: Date;
 
-    @OneToMany('Invoices', (invoice: Invoices) => invoice.customer)
-    invoices: Invoices[];
+    @OneToMany('Invoice', (invoice: Invoice) => invoice.customer)
+    invoices: Invoice[];
 }

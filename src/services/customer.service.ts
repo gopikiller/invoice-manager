@@ -1,8 +1,8 @@
-import type { Customers } from '../database/entities/customers';
+import type { Customer } from '../database/entities/customer';
 import { createCustomer, deleteCustomerById, getAllCustomers, getCustomerByEmail, getCustomerById, getCustomerByName, updateCustomerById } from '../database/repositories';
 
 class CustomerService {
-    public async createCustomer(customerData: Customers) {
+    public async createCustomer(customerData: Customer) {
         const isCustomerNameExist = await getCustomerByName(customerData.name);
         // Check if name already exist
         if (isCustomerNameExist) {
@@ -22,7 +22,7 @@ class CustomerService {
         return customer;
     }
 
-    public async getCustomerById(id: Customers['customerId']) {
+    public async getCustomerById(id: Customer['customerId']) {
         return await getCustomerById(id);
     }
 
@@ -30,7 +30,7 @@ class CustomerService {
         return await getAllCustomers();
     }
 
-    public async updateCustomer(id: Customers['customerId'], customerData: Customers) {
+    public async updateCustomer(id: Customer['customerId'], customerData: Customer) {
         const updatedResult = await updateCustomerById(id, customerData);
 
         if (!updatedResult) {
@@ -40,7 +40,7 @@ class CustomerService {
         return await this.getCustomerById(id);
     }
 
-    public async deleteCustomerByID(id: Customers['customerId']) {
+    public async deleteCustomerByID(id: Customer['customerId']) {
         return await deleteCustomerById(id);
     }
 }

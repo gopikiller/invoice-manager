@@ -13,4 +13,4 @@ const app = new Server(onConnectionClose);
 
 db.initializeDb()
     .then(() => app.listen())
-    .catch(e => console.log('Error connecting to Database' + e));
+    .catch(e => console.log(JSON.stringify(e)));

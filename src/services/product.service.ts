@@ -1,8 +1,8 @@
-import type { Products } from '../database/entities/products';
+import type { Product } from '../database/entities/product';
 import { createProduct, deleteProductByProductCode, getAllProducts, getProductById, getProductByProductCode, updateProductByProductCode } from '../database/repositories';
 
 class ProductService {
-    public async createProduct(productData: Products) {
+    public async createProduct(productData: Product) {
         const isProductExists = await getProductByProductCode(productData.productCode);
         // Check if product already exist
         if (isProductExists) {
@@ -16,11 +16,11 @@ class ProductService {
         return product;
     }
 
-    public async getProductById(id: Products['productId']) {
+    public async getProductById(id: Product['productId']) {
         return await getProductById(id);
     }
 
-    public async getProductByProductCode(productCode: Products['productCode']) {
+    public async getProductByProductCode(productCode: Product['productCode']) {
         return await getProductByProductCode(productCode);
     }
 
@@ -28,7 +28,7 @@ class ProductService {
         return await getAllProducts();
     }
 
-    public async updateProduct(productCode: Products['productCode'], productData: Partial<Products>) {
+    public async updateProduct(productCode: Product['productCode'], productData: Partial<Product>) {
         const updatedResult = await updateProductByProductCode(productCode, productData);
 
         if (!updatedResult) {
@@ -37,7 +37,7 @@ class ProductService {
         return await this.getProductByProductCode(productCode);
     }
 
-    public async deleteProductByProductCode(id: Products['productId']) {
+    public async deleteProductByProductCode(id: Product['productId']) {
         return await deleteProductByProductCode(id);
     }
 }

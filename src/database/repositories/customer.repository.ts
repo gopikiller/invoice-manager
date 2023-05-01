@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
 
-import type { Customers } from '../entities/customers';
+import type { Customer } from '../entities/customer';
 
-class CustomerRepository extends Repository<Customers> {
-    createCustomer = async (customerData: Customers) => {
+class CustomerRepository extends Repository<Customer> {
+    createCustomer = async (customerData: Customer) => {
         return await this.save(customerData);
     };
 
@@ -11,23 +11,23 @@ class CustomerRepository extends Repository<Customers> {
         return await this.createQueryBuilder().where({ active: true }).getMany();
     };
 
-    getCustomerById = async (id: Customers['customerId']) => {
+    getCustomerById = async (id: Customer['customerId']) => {
         return await this.findOne({ where: { customerId: id } });
     };
 
-    getCustomerByName = async (name: Customers['name']) => {
+    getCustomerByName = async (name: Customer['name']) => {
         return await this.findOne({ where: { name } });
     };
 
-    getCustomerByEmail = async (email: Customers['email']) => {
+    getCustomerByEmail = async (email: Customer['email']) => {
         return await this.findOne({ where: { email } });
     };
 
-    updateCustomerById = async (id: Customers['customerId'], updatedata: Partial<Customers>) => {
+    updateCustomerById = async (id: Customer['customerId'], updatedata: Partial<Customer>) => {
         return await this.update({ customerId: id }, updatedata);
     };
 
-    deleteCustomerById = async (id: Customers['customerId']) => {
+    deleteCustomerById = async (id: Customer['customerId']) => {
         return await this.delete(id);
     };
 }

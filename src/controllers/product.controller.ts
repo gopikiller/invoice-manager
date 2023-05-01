@@ -2,7 +2,7 @@ import { LoggerInterface } from '@gopikiller/winston-logger';
 import { Request, Response } from 'express';
 
 import { STATUS_CODE } from '../config';
-import type { Products } from '../database/entities/products';
+import type { Product } from '../database/entities/product';
 import { components, operations } from '../interfaces/schema.interface';
 import ProductService from '../services/product.service';
 import logger from '../utils/logger';
@@ -48,7 +48,7 @@ class ProductController {
         req: Request<any, any, operations['createProduct']['requestBody']['content']['application/json']>,
         res: Response<operations['createProduct']['responses']['201']['content']['application/json'] | components['schemas']['Error']>,
     ) => {
-        const productRequest = req.body as Products;
+        const productRequest = req.body as Product;
 
         try {
             const insertData = await this.productService.createProduct(productRequest);
@@ -66,7 +66,7 @@ class ProductController {
         res: Response<operations['updateProductByProductCode']['responses']['200']['content']['application/json'] | components['schemas']['Error']>,
     ) => {
         const { productCode } = req.params;
-        const productRequest = req.body as Products;
+        const productRequest = req.body as Product;
 
         try {
             const product = await this.productService.getProductByProductCode(productCode);
